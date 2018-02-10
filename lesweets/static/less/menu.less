@@ -1,0 +1,54 @@
+@import 'styles.less';
+
+.jumbotron {
+	background-color: @purple;
+	color: white;
+	h1 {
+		font-weight: bold;
+	}
+	h3 {
+		font-style: italic;
+	}
+}
+.menu-wrapper {
+	padding: 35px;
+	.card-wrapper {
+		padding: 15px;
+		.activity-card {
+			background-color: white;
+			border: 2px solid @teal;
+			height: 100%;
+			position: relative;
+			.title {
+				padding: 10px;
+			    background-color: @teal;
+			    color: white;
+			    font-size: 24pt;
+			    font-weight: bold;
+			    margin: 0px;
+				img {
+					width: 30px;
+					vertical-align: top;
+					margin-right: 10px;
+				}
+			}
+			.body {
+				padding: 10px;
+				.annotations {
+					margin-bottom: 50px;
+				}
+				.open-wrapper {
+					bottom: 10px;
+					position: absolute;
+					margin-top: 25px;
+					width: 100%;
+					.open {
+						float: right;
+						margin-right: 5px;
+					}
+				}
+
+			}
+		}
+	}
+}

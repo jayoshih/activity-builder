@@ -1,0 +1,76 @@
+@cream: #F7F7ED;
+@beige: #E7D6CF;
+@teal: #91CFCA;
+@lightteal: #A6D1C8;
+@pink: #EFBDC0;
+@darkpurple: #7A6698;
+@purple: #C4ABDF;
+@lightpurple: #ECCDF0;
+@blue: #C0D1F4;
+@lightblue: #DCECFF;
+
+body {
+	font-family: 'Catamaran', 'Poiret One', cursive;
+	background-color: @cream;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+.link {
+	cursor: pointer;
+	&:hover { font-weight: bold; }
+}
+
+.link-purple {
+	.link;
+	color: @darkpurple;
+}
+
+.link-blue {
+	.link;
+	color: @blue;
+}
+
+.link-teal {
+	.link;
+	color: @teal;
+}
+
+.btn-action {
+	cursor: pointer;
+	border: 2px solid white;
+	font-weight: bold;
+}
+
+.btn-white-color {
+	.btn-action;
+	color: white;
+	&:hover {
+		background-color: white;
+	}
+}
+
+.btn-teal {
+	.btn-white-color;
+	background-color: @teal;
+	border-color: @teal;
+	&:hover {
+		color: @teal;
+	}
+}
+
+.navbar {
+	background-color: @purple;
+	color: white;
+	.navbar-brand {
+		font-weight: bold;
+		color: white;
+		font-size: 24pt;
+		img {
+			width: 40px;
+			margin-right: 10px;
+		}
+	}
+}

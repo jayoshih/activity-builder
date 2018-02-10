@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block less %}<link rel="stylesheet/less" type="text/css" href="{% static 'less/menu.less' %}" />{% endblock %}
+{% block fullpage %}
+<div id="main">
+	<div class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1 class="display-2">Activity Sweets</h1>
+			<h3>Create activities for your Kolibri classroom here!</h3>
+		</div>
+	</div>
+	<div class="container-fluid menu-wrapper">
+		<h3>Select an activity below to get started...</h3>
+		{% for activity_list in activities %}
+			<div class="row">
+				{% for activity in activity_list %}
+				<div class="col-sm-{{colsize}} card-wrapper">
+					<div class="activity-card">
+						<h5 class="title">
+							<img src="{% static 'img/logo.png' %}" alt="Activity thumbnail">
+							{{activity.name}}
+						</h5>
+						<div class="body">
+							<p>{{activity.description}}
+							<p class="annotations">
+								<b>Subjects:</b> {{activity.annotation.subjects | join:" | "}}<br/>
+								<b>Est. Time:</b> {{activity.annotation.time}}<br/>
+								<b>Level:</b> {{activity.annotation.level}}<br/>
+								<b>Skills:</b> {{activity.annotation.skills | join:" | "}}
+							</p>
+							<div class="container-fluid open-wrapper">
+								<a href="/{{activity.slug}}" class="btn btn-teal open">OPEN</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}
