@@ -22,6 +22,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     url(r'^admin/', admin.site.urls),
+    url(r'^create_mathlib/(?P<category_id>[^/]+)/(?P<story_id>[^/]+)', views.create_mathlib, name='create_mathlib'),
 ]
 
 for activity in views.ACTIVITIES:

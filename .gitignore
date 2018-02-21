@@ -1,0 +1,4 @@
+*.pyc
+lesweets/activities/*
+
+*.sqlite3

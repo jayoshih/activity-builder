@@ -1,0 +1,57 @@
+{% load staticfiles %}
+{% load extratags %}
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+        <title>Math Libs</title>
+
+        <link rel="stylesheet" href="{% static 'css/mathlibs.css' %}" type="text/css">
+        <script src="{% static 'js/activities/jquery-3.3.1.min.js' %}" type="text/javascript"></script>
+		<script src="{% static 'js/activities/mathlibs.js' %}" type="text/javascript"></script>
+    </head>
+	<body>
+		<div id="wrapper">
+			<form id="blanks" class="page">
+				<h3>MATH LIBS</h3>
+				<div id="description">Fill in the blanks to create a silly story! <br>Click <a id="review-link">here</a> to review terms</div>
+				<p><a id="clear-answers">Clear Answers</a></p>
+				{% for item in story.items %}
+					<p>{{item.label}}</p> <input type="{{item.type}}" id="{{item.id}}"  required class="blank">
+				{% endfor %}
+				<br><br>
+				<input type="submit" value="Create Story!" class="button bottom">
+			</form>
+
+			<div id="review" class="page">
+				<h3>REVIEW</h3>
+				<hr>
+				<p><b>ADJECTIVE</b> describes something or somebody. Short, soft, funny, and stinky are adjectives.</p>
+				<p><b>ADVERB</b> tells how something is done. It modifies a verb and usually ends in "ly." Modestly, greedily, quickly, and carefully are adverbs.</p>
+				<p><b>EXCLAMATION</b> is a sudden cry or remark to express how you are feeling. Ouch! Hey! and Oops! are all exclamations.</p>
+				<p><b>NOUN</b> is the name of a person, place, or thing. Teacher, school, nose, and dog are nouns.</p>
+				<p><b>PLURAL NOUN</b> means more than one of a person, place, or thing. For example, cats pluralized is cats</p>
+				<p><b>VERB</b> is an action word. Run, jump, walk, and sit are verbs. Put the verbs in past tense if the directions say PAST TENSE. Ran, jumped, walked, and sat are verbs in the past tense.</p>
+				<a class="button bottom blanks-link">GOT IT!</a>
+			</div>
+
+			<div id="story" class="page">
+				<h3>{{story.title}}</h3>
+				<p id="story-paragraph">
+					{{story | parsestory | safe}}
+				</p>
+				<div id="incorrect" class="message">Try again</div>
+				<input type="number" id="answer" class="blank">
+				<div class="center">
+					<button id="submit-answer" class="button">SUBMIT</button>
+					<div id="correct" class="message"></div>
+					<button class="button blanks-link" id="new-story">Create Another Story</button>
+				</div>
+			</div>
+			<div id="hidden-formula">{% for n in formula %}{{n.operator}} <span class="{{n.id}}"></span> {% endfor %}</div>
+		</div>
+	</body>
+</html>

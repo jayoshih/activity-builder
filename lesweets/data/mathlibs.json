@@ -1,0 +1,167 @@
+{
+	"categories": [
+		{
+			"name": "Addition",
+			"id": "addition",
+			"stories": [
+				{
+					"id": "story-1",
+					"title": "A Day in the Park",
+					"story": "One day, [name-1] was walking in the park and saw [number-1] [adjective-1] [plural-1] near the [noun-1]. [adverb-1], [name-1] told [name-2] about it. [name-2] replied, \"[exclamation-1]! I saw [number-2] [adjective-2] [plural-1] by [place-1]!\" How many [plural-1] did [name-1] and [name-2] see in total?",
+					"items": [
+						{
+							"id": "name-1",
+							"type": "text",
+							"label": "Name"
+						},
+						{
+							"id": "number-1",
+							"type": "number",
+							"label": "Number",
+							"operator": "+"
+						},
+						{
+							"id": "adjective-1",
+							"type": "text",
+							"label": "Adjective"
+						},
+						{
+							"id": "plural-1",
+							"type": "text",
+							"label": "Plural Noun"
+						},
+						{
+							"id": "noun-1",
+							"type": "text",
+							"label": "Noun"
+						},
+						{
+							"id": "adverb-1",
+							"type": "text",
+							"label": "Adverb"
+						},
+						{
+							"id": "name-2",
+							"type": "text",
+							"label": "Name"
+						},
+						{
+							"id": "exclamation-1",
+							"type": "text",
+							"label": "Exclamation"
+						},
+						{
+							"id": "number-2",
+							"type": "number",
+							"label": "Number",
+							"operator": "+"
+						},
+						{
+							"id": "adjective-2",
+							"type": "text",
+							"label": "Adjective"
+						},
+						{
+							"id": "place-1",
+							"type": "text",
+							"label": "Place"
+						}
+					]
+				},
+				{
+					"id": "story-2",
+					"title": "Choosing the Perfect Gift",
+					"story": "",
+					"items": [
+						{
+							"id": "place-1",
+							"type": "text",
+							"label": "Place"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Subtraction",
+			"id": "subtraction",
+			"operator": "-",
+			"stories": [
+				{
+					"id": "story-1",
+					"title": "A Day in the Park",
+					"story": "One day, [name-1] was walking in the park and saw [number-1] [adjective-1] [plural-1] in the [noun-1]. [adverb-1], [name-1] told [name-2] about it. [name-2] replied, \"[exclamation-1]! I saw [number-2] [adjective-2] [plural-1] by the [place-1]!\" How many [plural-1] did [name-1] and [name-2] see in total?",
+					"items": [
+						{
+							"id": "name-1",
+							"type": "text",
+							"label": "Name"
+						},
+						{
+							"id": "number-1",
+							"type": "number",
+							"label": "Number"
+						},
+						{
+							"id": "adjective-1",
+							"type": "text",
+							"label": "Adjective"
+						},
+						{
+							"id": "plural-1",
+							"type": "text",
+							"label": "Plural Noun"
+						},
+						{
+							"id": "noun-1",
+							"type": "text",
+							"label": "Noun"
+						},
+						{
+							"id": "adverb-1",
+							"type": "text",
+							"label": "Adverb"
+						},
+						{
+							"id": "name-2",
+							"type": "text",
+							"label": "Name"
+						},
+						{
+							"id": "exclamation-1",
+							"type": "text",
+							"label": "Exclamation"
+						},
+						{
+							"id": "number-2",
+							"type": "number",
+							"label": "Number"
+						},
+						{
+							"id": "adjective-2",
+							"type": "text",
+							"label": "Adjective"
+						},
+						{
+							"id": "place-1",
+							"type": "text",
+							"label": "Place"
+						}
+					]
+				},
+				{
+					"id": "story-2",
+					"title": "Choosing the Perfect Gift",
+					"story": "",
+					"items": [
+						{
+							"id": "place-1",
+							"type": "text",
+							"label": "Place"
+						}
+					]
+				}
+			]
+		}
+	]
+}

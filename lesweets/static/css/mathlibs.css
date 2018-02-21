@@ -1,0 +1,115 @@
+body {
+	background-color: #C4ABDF;
+}
+
+* {
+	font-family: cursive;
+}
+
+#hidden-formula, #story, #review, .message, #new-story {
+	display: none;
+}
+
+#wrapper {
+	background-color: white;
+	padding: 20px;
+	max-width: 650px;
+    margin: 5vh auto;
+    position: relative;
+    padding-bottom: 75px;
+    border: 5px solid #DEDEDE;
+}
+
+h3 {
+	font-size: 25pt;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#description {
+	text-align: center;
+	color: gray;
+	font-style: italic;
+	margin-bottom: 30px;
+}
+
+#review-link, #clear-answers {
+	font-weight: bold;
+	color: purple;
+	cursor: pointer;
+}
+#clear-answers {
+	float: right;
+	margin-right: 20px;
+}
+
+#blanks p {
+	margin: 5px 0px;
+}
+
+.blank {
+	font-size: 16pt;
+	border: 1px solid #B0D8FB;
+    margin-bottom: 30px;
+    background-color: #F0F8FF;
+    padding: 5px;
+    outline: none;
+    width: 95%;
+}
+
+.blank:active, .blank:hover, .blank:focus {
+	background-color: #FFFFF0;
+}
+
+.button {
+	border: none;
+    padding: 5px 25px;
+    font-size: 14pt;
+    border-radius: 5px;
+    text-decoration: none !important;
+    cursor: pointer;
+    border: 4px solid mediumpurple;
+    background-color: mediumpurple;
+    color: white;
+}
+
+.button:hover, .button:focus {
+	color: mediumpurple;
+	background-color: white;
+}
+
+.bottom {
+	right: 20px;
+    bottom: 20px;
+    position: absolute;
+}
+
+#review p{
+	font-size: 12pt;
+    margin-top: 35px;
+}
+
+#story-paragraph {
+	margin: 50px 0px;
+    font-size: 14pt;
+}
+
+.center {
+	text-align: center;
+}
+
+#incorrect {
+	color: red;
+    margin-bottom: 5px;
+    font-size: 14pt;
+}
+
+#correct {
+	font-size: 20pt;
+    color: darkseagreen;
+    font-weight: bold;
+}
+
+#new-story {
+	margin-top: 50px;
+}

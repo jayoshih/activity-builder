@@ -1,6 +1,36 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load extratags %}
 {% block less %}<link rel="stylesheet/less" type="text/css" href="{% static 'less/page.less' %}" />{% endblock %}
 {% block content %}
-
+<div id="mathlibs">
+	<p class="text-center">Description of how this works...</p>
+	<p class="text-center">Categories:
+		{% for category in stories.categories %}
+		{% if not forloop.first %} | {% endif %}
+		<a href="#{{category.name}}" class="link-purple">{{category.name}}</a>
+		{% endfor %}
+	</p>
+	{% for category in stories.categories %}
+		<div class="category" id="{{category.name}}">
+			<h2>{{category.name}}</h2>
+			<div class="row">
+				{% for story in category.stories %}
+				<div class="col-3">
+					<div class="card">
+						<div class="story">
+							<div class="card-body">
+								<h4>{{story.title}}</h4>
+								<p class="story-text">{{story | parsestory | safe}}</p>
+								<a class="get-story pull-right btn btn-teal" href="{% url 'create_mathlib' category_id=category.id story_id=story.id %}" download>DOWNLOAD</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	{% endfor %}
+</div>
 {% endblock %}
+
