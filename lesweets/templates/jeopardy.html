@@ -3,65 +3,44 @@
 {% block less %}<link rel="stylesheet/less" type="text/css" href="{% static 'less/page.less' %}" />{% endblock %}
 {% block content %}
 <div id="jeopardy">
-	<table>
-		<tbody>
-			<tr class="text-center"><td colspan="8" class="axis">CATEGORIES</td></tr>
-			<tr>
-				<td rowspan="8"><div class="axis yaxis">POINTS</div></td>
-				<td></td>
-				<td><input type="text" id="category-1" placeholder="Category 1"></td>
-				<td><input type="text" id="category-2" placeholder="Category 2"></td>
-				<td><input type="text" id="category-3" placeholder="Category 3"></td>
-				<td><input type="text" id="category-4" placeholder="Category 4"></td>
-				<td><input type="text" id="category-5" placeholder="Category 5"></td>
-				<td><input type="text" id="category-6" placeholder="Category 6"></td>
-			</tr>
-			<tr>
-				<td><input type="number" id="points-1" value="100" class="points"></td>
-				<td><textarea id="question-1-1" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-2-1" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-3-1" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-4-1" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-5-1" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-6-1" class="question" rows="4"></textarea></td>
-			</tr>
-			<tr>
-				<td><input type="number" id="points-1" value="200" class="points"></td>
-				<td><textarea id="question-1-2" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-2-2" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-3-2" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-4-2" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-5-2" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-6-2" class="question" rows="4"></textarea></td>
-			</tr>
-			<tr>
-				<td><input type="number" id="points-1" value="300" class="points"></td>
-				<td><textarea id="question-1-3" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-2-3" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-3-3" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-4-3" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-5-3" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-6-3" class="question" rows="4"></textarea></td>
-			</tr>
-			<tr>
-				<td><input type="number" id="points-1" value="400" class="points"></td>
-				<td><textarea id="question-1-4" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-2-4" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-3-4" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-4-4" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-5-4" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-6-4" class="question" rows="4"></textarea></td>
-			</tr>
-			<tr>
-				<td><input type="number" id="points-1" value="500" class="points"></td>
-				<td><textarea id="question-1-5" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-2-5" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-3-5" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-4-5" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-5-5" class="question" rows="4"></textarea></td>
-				<td><textarea id="question-6-5" class="question" rows="4"></textarea></td>
-			</tr>
-		</tbody>
-	</table>
+	<p class="text-center">Select the size of your board, and create the categories, questions, and answers for your game!</p>
+	<form method="get" action="{% url 'jeopardy' %}" class="text-center">
+		<label for="num-rows">Rows</label> <input type="number" id="num-rows" min=2 max=10 pattern="\d+" name="rows" required value={{numrows}} class="board-size">
+		&nbsp; <label for="num-cols">Columns</label> <input type="number" id="num-cols" min=2 max=10 pattern="\d+" name="cols" required value={{numcols}} class="board-size">
+		<input type="submit" value="APPLY" class="btn btn-teal">
+	</form>
+	<hr>
+	<form action="{% url 'create_jeopardy' %}" method="post">
+		<table>
+			<tbody>
+				<tr class="text-center"><td colspan="{{numcols|add:2}}" class="axis">CATEGORIES</td></tr>
+				<tr>
+					<td rowspan="{{numrows|add:1}}"><div class="axis yaxis">POINTS</div></td>
+					<td></td>
+					{% for category in categories %}
+						<td><input type="text" name="c-{{category}}" class="category" placeholder="Category {{category}}" required></td>
+					{% endfor %}
+				</tr>
+				{% for row in grid %}
+				<tr>
+					<td class="text-right"><input type="number" name="p-{{row.num}}" value="{{row.points}}" class="points" required min=1></td>
+					{% for col in row.columns %}
+					<td>
+						<div>
+							<textarea name="q-{{row.num}}-{{col}}" class="question" rows="4" placeholder="Clue" required></textarea>
+						</div>
+						<div>
+							<textarea name="a-{{row.num}}-{{col}}" class="answer" rows="2" placeholder="Answer" required></textarea>
+						</div>
+					</td>
+					{% endfor %}
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="bottom-wrapper">
+			<input type="submit" value="CREATE GAME!" class="btn btn-teal" id="create-jeopardy-game">
+		</div>
+	</form>
 </div>
 {% endblock %}

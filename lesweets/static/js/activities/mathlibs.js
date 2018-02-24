@@ -55,7 +55,7 @@ function showStory() {
 	$("#story").fadeIn(500);
 }
 
-function submitBlanks(ev, data) {
+function submitBlanks(ev) {
 	ev.preventDefault();
 	$("#blanks").find(".blank").each(function(i, item) {
 		$("." + item.id).text($(item).val().trim());

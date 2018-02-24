@@ -1,0 +1,270 @@
+body {
+	background-color: #3F48CC;
+}
+
+* {
+	font-family: Verdana;
+}
+
+.btn {
+	background-color: #3F48CC;
+	color: #F0B358;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 2px solid #3F48CC;
+}
+
+.btn:hover {
+	background-color: #F0B358;
+	color: #3F48CC;
+}
+
+.link {
+	color: #3F48CC;
+	cursor: pointer;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.link:hover {
+	color: #F0B358;
+}
+
+.page {
+	padding: 20px;
+}
+
+.center {
+	text-align: center;
+}
+
+h2 {
+	color: #83A1FB;
+	text-align: center;
+}
+
+#wrapper {
+	background-color: white;
+    margin: 5vh auto;
+    position: relative;
+    padding-bottom: 75px;
+    border: 5px solid #83A1FB;
+}
+
+#title {
+	background-color: #83A1FB;
+	text-align: center;
+    margin: 0px;
+    color: white;
+    padding: 10px;
+    text-shadow: 2px 2px 0px gray;
+    font-size: 35pt;
+}
+
+.error {
+	color: red;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.pad-top {
+	margin-top: 30px;
+}
+
+
+/* SETUP PAGE */
+
+#instructions {
+	color: gray;
+    font-style: italic;
+}
+
+#team-list {
+	padding: 0px;
+	list-style: none;
+	margin-bottom: 20px;
+}
+
+#team-list li {
+	margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+#team-name {
+	padding: 5px;
+    font-size: 12pt;
+    width: 70%;
+    margin: 5px;
+    margin-bottom: 30px;
+    max-width: 300px;
+}
+
+
+
+/* MAIN BOARD */
+
+#table-wrapper {
+	overflow-x: auto;
+	padding-bottom: 30px;
+}
+table {
+	width: 100%;
+    margin: 35px 0px;
+    min-width: 200px;
+    background-color: black;
+    color: white;
+}
+
+th, td {
+	background-color: #3F48CC;
+	min-width: 150px;
+}
+
+th {
+	color: white;
+	font-weight: bold;
+	margin-bottom: 20px;
+	padding: 15px 5px;
+	text-transform: uppercase;
+}
+
+td {
+	height: 100px;
+}
+
+.points-link {
+	padding: 30px 5px;
+    min-height: 40px;
+    font-weight: bold;
+    font-size: 20pt;
+    color: gold;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.points-link:hover {
+	background-color: #83A1FB;
+}
+
+
+
+/* SCORES DISPLAY */
+
+#score {
+	padding: 30px;
+}
+
+#team-display {
+	width: 100%;
+}
+.team-card {
+	width: fit-content;
+	min-width: 150px;
+	border: 4px solid black;
+	background-color: #403DFC;
+	color: white;
+	text-align: center;
+	display: inline-block;
+	margin-right: 30px;
+	margin-top: 30px;
+}
+
+.team-card .points {
+	font-size: 20pt;
+	border-bottom: 4px solid black;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.team-card .team-name {
+	font-family: cursive;
+	padding: 5px;
+	font-size: 18pt;
+}
+
+.set-points {
+	border-top: 4px solid black;
+}
+
+.set-points div {
+	display: inline-block;
+	float: left;
+}
+
+.add-points, .subtract-points {
+	width: 20%;
+    font-size: 20pt;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 3px 0px;
+}
+
+.point {
+	font-weight: bold;
+	width: 60%;
+	float: left;
+	background-color: antiquewhite;
+	color: black;
+	padding: 10px 0px;
+}
+
+.add-points {
+	background-color: forestgreen;
+}
+.add-points:hover {
+	background-color: limegreen;
+}
+
+.subtract-points {
+	background-color: indianred;
+}
+.subtract-points:hover {
+	background-color: red;
+}
+
+.gray {
+	background-color: darkgray;
+}
+
+/* CLUE PAGE */
+#clue {
+	padding: 30px;
+    font-size: 20pt;
+}
+
+.answer {
+	padding: 30px;
+	display: none;
+}
+
+.answer h6 {
+	background-color: #83A1FB;
+    padding: 10px 20px;
+    font-size: 16pt;
+    margin: 0px;
+    color: white;
+}
+
+.answer-text {
+	padding: 20px;
+	background-color: aliceblue;
+	font-size: 18pt;
+	margin: 0px;
+}
+
+.point-prompt {
+	font-weight: bold;
+	display: none;
+}
+
+
+
+/* WIN PAGE */
+
+#win-message {
+	font-size: 24pt;
+	font-weight: bold;
+}

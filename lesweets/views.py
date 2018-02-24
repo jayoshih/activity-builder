@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from lesweets.html_writer import HTMLWriter
+from urllib.parse import parse_qsl
 
 def mathlibs(request):
     with open(os.path.join(settings.DATA_URL, "mathlibs.json"), "rb") as mathlib_data:
@@ -18,8 +19,88 @@ def mathlibs(request):
             "stories": json.load(mathlib_data)
         })
 
+def create_mathlib(request, category_id, story_id):
+    with open(os.path.join(settings.DATA_URL, "mathlibs.json"), "rb") as mathlib_data:
+        data = json.load(mathlib_data)
+        category_data = next(c for c in data["categories"] if c["id"] == category_id)
+        story_data = next(s for s in category_data["stories"] if s["id"] == story_id)
+
+        # Get list of numbers to use in formula
+        numbers = [n for n in story_data["items"] if n.get("operator")]
+
+        return create_zip(
+            "{}-{}.zip".format(category_id, story_id),
+            'activities/mathlibs_template.html',
+            {"story": story_data, "formula": numbers}
+        )
+
 def jeopardy(request):
-    return render(request, 'jeopardy.html', { 'activities': ACTIVITIES, "page": "Jeopardy" })
+    NUM_ROWS = int(request.GET.get('rows', None) or 5)
+    NUM_COLUMNS = int(request.GET.get('cols', None) or 6)
+    POINT_INCREMENT = 100
+
+    grid = []
+    points = 0
+    for row in range(0, NUM_ROWS):
+        points += POINT_INCREMENT
+        grid.append({
+            "num": row,
+            "points": points,
+            "columns": range(0, NUM_COLUMNS),
+        })
+
+    return render(request, 'jeopardy.html', {
+        "activities": ACTIVITIES,
+        "page": "Jeopardy",
+        "grid": grid,
+        "categories": range(1, NUM_COLUMNS + 1), # Start at category 1 rather than 0
+        "numrows": NUM_ROWS,
+        "numcols": NUM_COLUMNS,
+    })
+
+def create_jeopardy(request):
+    params = parse_qsl(request.body)
+
+    # Parse query params
+    rows = {}
+    categories = {}
+
+    for k, v in params:
+        keys = k.decode('utf-8').split("-")
+        value = v.decode('utf-8')
+
+        # Parse categories
+        if keys[0] == "c":
+            colnum = int(keys[1]) - 1
+            categories.update({ str(colnum) :  value })
+        elif keys[0] == "p" or keys[0] == "q" or keys[0] == "a":
+            rownum = keys[1]
+            row = rows.get(rownum) or {}
+
+            # Process points
+            if keys[0].startswith("p"):
+                row.update({ "points": int(value) })
+
+            # Process questions and answers
+            else:
+                colnum = keys[2]
+                columns = row.get("columns") or {}
+                column = columns.get(colnum) or {}
+                column.update({ keys[0]: value, "num": colnum })
+                columns.update({ colnum : column })
+                row.update({ "columns" : columns })
+            rows.update({ rownum: row })
+
+    game = {
+        "categories": [categories[k] for k in sorted(categories)],
+        "rows": [{
+            "num": k,
+            "points": rows[k]["points"],
+            "columns": [rows[k]["columns"][col] for col in sorted(rows[k]["columns"])]
+        } for k in sorted(rows)]
+    }
+
+    return create_zip("jeopardy.zip", 'activities/jeopardy_template.html', game)
 
 def tictactoe(request):
     return render(request, 'mathlibs.html', { 'activities': ACTIVITIES })
@@ -149,20 +230,3 @@ def create_zip(zip_name, html, context):
     response['Content-Disposition'] = 'attachment; filename="{}"'.format(zip_name)
 
     return response
-
-
-def create_mathlib(request, category_id, story_id):
-    with open(os.path.join(settings.DATA_URL, "mathlibs.json"), "rb") as mathlib_data:
-        data = json.load(mathlib_data)
-        category_data = next(c for c in data["categories"] if c["id"] == category_id)
-        story_data = next(s for s in category_data["stories"] if s["id"] == story_id)
-
-        # Get list of numbers to use in formula
-        numbers = [n for n in story_data["items"] if n.get("operator")]
-
-        return create_zip(
-            "{}-{}.zip".format(category_id, story_id),
-            'activities/mathlibs_template.html',
-            {"story": story_data, "formula": numbers}
-        )
-

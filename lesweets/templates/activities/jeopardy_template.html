@@ -1,0 +1,94 @@
+{% load staticfiles %}
+{% load extratags %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+
+        <title>Jeopardy</title>
+
+        <link rel="stylesheet" href="{% static 'css/jeopardy.css' %}" type="text/css">
+        <script src="{% static 'js/activities/jquery-3.3.1.min.js' %}" type="text/javascript"></script>
+		<script src="{% static 'js/activities/jeopardy.js' %}" type="text/javascript"></script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<h1 id="title">Jeopardy!</h1>
+			<div id="setteams" class="page">
+				<h2>Teams</h2>
+				<div class="center">
+					<ul id="team-list"></ul>
+					<div id="team-error" class="error"></div>
+					<input type="text" id="team-name" placeholder="Enter team name...">
+					<a id="add-team" class="link">ADD</a>
+					<p><a id="play-game" class="btn">Let's Play!</a></p>
+					<p class="pad-top"><a class="link show-help">How to Play</a></p>
+				</div>
+			</div>
+			<div id="instructions" class="page">
+				<h2>How to Play</h2>
+				<ol>
+					<li>Play individually or in groups</li>
+					<li>Pick a category and a point value</li>
+					<li>Say what the clue refers to and win points</li>
+					<li>Once the board is cleared, the team with the most points wins!</li>
+				</ol>
+				<p class="center pad-top">
+					<a class="btn close-help">Got it!</a>
+				</p>
+			</div>
+			<div id="main" class="page">
+				<h2>Pick a Category!</h2>
+				<div id="table-wrapper">
+					<table>
+						<tbody>
+							<tr>
+								{% for category in categories %}
+									<th>{{category}}</th>
+								{% endfor %}
+							</tr>
+							{% for row in rows %}
+							<tr>
+								{% for col in row.columns %}
+									<td class="points-card center">
+										<div class="points-link" data-clue="q-{{row.num}}-{{col.num}}" data-points={{row.points}} id="card-{{row.num}}-{{col.num}}">{{row.points}}</div>
+									</td>
+								{% endfor %}
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			{% for row in rows %}
+				{% for col in row.columns %}
+					<div id="q-{{row.num}}-{{col.num}}" class="page">
+						<p id="clue">{{col.q}}</p>
+						<p class="center pad-top"><a class="btn show-answer" data-answer="a-{{row.num}}-{{col.num}}">SHOW ANSWER</a></p>
+						<div class="answer" id="a-{{row.num}}-{{col.num}}">
+							<h6>Answer</h6>
+							<p class="answer-text">{{col.a}}</p>
+							<p class="center pad-top">
+								<span class="point-prompt"  id="a-{{row.num}}-{{col.num}}-prompt">
+									Have you finished assigning points below?
+									&nbsp; <a class="link back-to-main" data-card="card-{{row.num}}-{{col.num}}">Yes, return to board</a>
+								</span>
+							</p>
+						</div>
+					</div>
+				{% endfor %}
+			{% endfor %}
+			<div id="winner" class="page">
+				<h2>BOARD CLEAR!</h2>
+				<p id="win-message" class="center"></p>
+			</div>
+			<div id="score">
+				<hr>
+				<h4>Scores</h4>
+				<div id="team-display"></div>
+			</div>
+		</div>
+	</body>
+</html>
